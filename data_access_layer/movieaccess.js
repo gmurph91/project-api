@@ -9,6 +9,7 @@ const instance = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopolog
 
 app.use(bodyParser.json())
 app.use(cors());
+
 exports.Index = (req, res, next) => {
         instance.connect((err, client) => {
           if (err) {res.send(err)} else {
@@ -16,5 +17,13 @@ exports.Index = (req, res, next) => {
           collection.find().toArray().then(r => res.send(r))
         }})
       }
+
+  exports.Create = (req, res, next) => {
+    instance.connect((err, client) => {
+      if (err) {res.send(err)} else {
+      const collection = client.db("project-database").collection("movies")
+      collection.insertOne(req.body).then(r => res.send(r.ops))
+    }})
+  }
 
       
