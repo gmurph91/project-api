@@ -23,7 +23,15 @@ exports.Index = (req, res, next) => {
         }})
       }
 
-      exports.Create = (req, res, next) => {
+      exports.Creategame = (req, res, next) => {
+        instance.connect((err, client) => {
+          if (err) {res.send(err)} else {
+          const collection = client.db("project-database").collection("codename-games")
+          collection.insertOne(req.body).then(r => res.send(r.ops))
+        }})
+      }
+
+      exports.Createwords = (req, res, next) => {
         instance.connect((err, client) => {
           if (err) {res.send(err)} else {
           const collection = client.db("project-database").collection("codename-words")
