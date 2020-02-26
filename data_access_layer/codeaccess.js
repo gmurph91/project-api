@@ -39,3 +39,18 @@ exports.Index = (req, res, next) => {
           collection.insertMany(req.body).then(r => res.send(r.ops))
         }})
       }
+
+      exports.Findgame = (req, res, next) => {
+        console.log(req.params.joinCode)
+        instance.connect((err, client) => {
+          if (err) res.send(err)
+          const collection = client.db("project-database").collection("codename-games")
+          collection.findOne({ "joinCode": req.params.joinCode }, (error, result) => {
+            if (error) {
+              return res.status(500).send(error);
+            }
+            res.send(result);
+          })
+        })
+        
+      }
