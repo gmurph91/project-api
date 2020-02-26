@@ -6,6 +6,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var moviesRouter = require('./routes/movies');
+const Pusher = require('pusher');
 var blogRouter = require('./routes/blog');
 var codeRouter = require('./routes/codenames')
 require('dotenv').config({ path: './.env' })
@@ -19,6 +20,15 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json())
 app.use(cors());
+
+var pusher = new Pusher({
+  appId: '953987',
+  key: '462207fd95a0750caf6c',
+  secret: '92abccd7d06d8ced65ac',
+  cluster: 'us3',
+  encrypted: true
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +45,12 @@ app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
 app.use('/blog', blogRouter);
 app.use('/codenames', codeRouter);
+
+app.post('/message', (req, res) => {
+  const payload = req.body;
+  pusher.trigger('chat', 'message', payload);
+  res.send(payload)
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
