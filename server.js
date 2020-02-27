@@ -48,7 +48,8 @@ app.use('/codenames', codeRouter);
 
 app.post('/message', (req, res) => {
   const payload = req.body;
-  pusher.trigger('chat', 'message', payload);
+  const id = req.body.id;
+  pusher.trigger(`private-${id}`, 'message', payload);
   res.send(payload)
 });
 
