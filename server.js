@@ -52,6 +52,13 @@ app.post('/message', (req, res) => {
   res.send(payload)
 });
 
+app.post('/pusher/auth', function(req, res) {
+  var socketId = req.body.socket_id;
+  var channel = req.body.channel_name;
+  var auth = pusher.authenticate(socketId, channel);
+  res.send(auth);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
