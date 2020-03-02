@@ -34,7 +34,7 @@ exports.Index = (req, res, next) => {
       exports.Createwords = (req, res, next) => {
         instance.connect((err, client) => {
           if (err) {res.send(err)} else {
-          const collection = client.db("project-database").collection("codename-words")
+          const collection = client.db("project-database").collection("cah-white")
           console.log(req.body)
           collection.insertMany(req.body).then(r => res.send(r.ops))
         }})
