@@ -10,11 +10,14 @@ const Pusher = require('pusher');
 var blogRouter = require('./routes/blog');
 var codeRouter = require('./routes/codenames')
 var appleRouter = require('./routes/apples')
-require('dotenv').config({ path: './.env' })
-var app = express();
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 var cors = require('cors')
 var port = process.env.PORT;
 const bodyParser = require('body-parser')
+io.listen(server);
+require('dotenv').config({ path: './.env' })
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -28,6 +31,18 @@ var pusher = new Pusher({
   secret: '92abccd7d06d8ced65ac',
   cluster: 'us3',
   encrypted: true
+});
+
+io.on('connection', function(socket){
+  socket.on('green card', function(card){
+    io.emit('green card', card);
+  });
+  // socket.on('red card', function(card){
+  //   io.emit('red card', card);
+  // });
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 });
 
 
@@ -80,4 +95,4 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(port, () => console.log(`API listening on port ${port}!`))
+server.listen(port, () => console.log(`API listening on port ${port}!`))
