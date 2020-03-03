@@ -18,6 +18,8 @@
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
     "pusher": "^3.0.0",
-    "pusher-js": "^5.1.1"
+    "pusher-js": "^5.1.1",
+    "websocket": "^1.0.31",
+    "websockets": "^0.2.0"
   }
 }
