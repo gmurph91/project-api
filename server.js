@@ -9,6 +9,7 @@ var moviesRouter = require('./routes/movies');
 const Pusher = require('pusher');
 var blogRouter = require('./routes/blog');
 var codeRouter = require('./routes/codenames')
+var appleRouter = require('./routes/apples')
 require('dotenv').config({ path: './.env' })
 var app = express();
 var cors = require('cors')
@@ -45,6 +46,7 @@ app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
 app.use('/blog', blogRouter);
 app.use('/codenames', codeRouter);
+app.use('/apples', appleRouter);
 
 app.post('/message', (req, res) => {
   const payload = req.body;
