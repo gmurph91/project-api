@@ -37,9 +37,9 @@ io.on('connection', function(socket){
   socket.on('green card', function(card){
     io.emit('green card', card);
   });
-  // socket.on('red card', function(card){
-  //   io.emit('red card', card);
-  // });
+  socket.on('red card', function(card){
+    io.emit('red card', card);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
