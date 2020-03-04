@@ -38,15 +38,23 @@ io.on('connection', function(socket){
     socket.join(room);
 });
   socket.on('green card', function(card){
+    let room = card.room
+    socket.join(room);
     io.in(room).emit('green card', card);
   });
   socket.on('red card', function(card){
+    let room = card.room
+    socket.join(room);
     io.in(room).emit('red card', card);
   });
   socket.on('remove reds', function(cards){
+    let room = cards.room
+    socket.join(room);
     io.in(room).emit('remove reds', cards);
   });
   socket.on('join game', function(user){
+    let room = user.room
+    socket.join(room);
     io.in(room).emit('join game', user);
   });
   socket.on('disconnect', function(){
