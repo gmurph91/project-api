@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const codeAccess = require('../data_access_layer/appleaccess')
+const appleAccess = require('../data_access_layer/appleaccess')
 
-router.get('/green', codeAccess.Green);
-router.get('/red', codeAccess.Red);
-router.post('/newgame', codeAccess.Creategame);
-router.get('/savedgame/:joinCode', codeAccess.Findgame);
+router.get('/green', appleAccess.Green);
+router.get('/red', appleAccess.Red);
+router.post('/newgame', appleAccess.Creategame);
+router.put('/update/:joinCode', appleAccess.Update);
+router.get('/savedgame/:joinCode', appleAccess.Findgame);
 
 module.exports = router;

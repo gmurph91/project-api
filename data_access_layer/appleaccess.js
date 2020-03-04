@@ -40,7 +40,6 @@ exports.Green = (req, res, next) => {
       }
 
       exports.Findgame = (req, res, next) => {
-        console.log(req.params.joinCode)
         instance.connect((err, client) => {
           if (err) res.send(err)
           const collection = client.db("project-database").collection("apples-games")
@@ -52,4 +51,16 @@ exports.Green = (req, res, next) => {
           })
         })
         
+      }
+
+      exports.Update = (req, res, next) => {
+        instance.connect((err, client) => {
+          if (err) {res.send(err)} else {
+          const collection = client.db("project-database").collection("apples-games")
+          collection.replaceOne(
+            { "joinCode": req.params.joinCode }, 
+            req.body,
+            {upsert: true}
+          ).then(r => res.send(r.ops))
+        }})
       }

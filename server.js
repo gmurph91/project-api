@@ -40,6 +40,12 @@ io.on('connection', function(socket){
   socket.on('red card', function(card){
     io.emit('red card', card);
   });
+  socket.on('remove reds', function(cards){
+    io.emit('remove reds', cards);
+  });
+  socket.on('join game', function(user){
+    io.emit('join game', user);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
