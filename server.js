@@ -34,17 +34,20 @@ var pusher = new Pusher({
 });
 
 io.on('connection', function(socket){
+  socket.on('room', function(room) {
+    socket.join(room);
+});
   socket.on('green card', function(card){
-    io.emit('green card', card);
+    io.in(room).emit('green card', card);
   });
   socket.on('red card', function(card){
-    io.emit('red card', card);
+    io.in(room).emit('red card', card);
   });
   socket.on('remove reds', function(cards){
-    io.emit('remove reds', cards);
+    io.in(room).emit('remove reds', cards);
   });
   socket.on('join game', function(user){
-    io.emit('join game', user);
+    io.in(room).emit('join game', user);
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
