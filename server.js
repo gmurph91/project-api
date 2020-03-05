@@ -55,12 +55,17 @@ io.on('connection', function(socket){
   socket.on('join game', function(user){
     let room = user.room
     socket.join(room);
-    io.in(room).emit('join game', user);
+    socket.broadcast.to(room).emit('join game', user);
   });
   socket.on('existing players', function(players){
     let room = players.room
     socket.join(room);
     io.in(room).emit('existing players', players);
+  });
+  socket.on('winner', function(winner){
+    let room = winner.room
+    socket.join(room);
+    io.in(room).emit('winner', winner);
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
