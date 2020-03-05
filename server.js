@@ -62,6 +62,11 @@ io.on('connection', function(socket){
     socket.join(room);
     io.in(room).emit('existing players', players);
   });
+  socket.on('judge', function(judge){
+    let room = judge.room
+    socket.join(room);
+    io.in(room).emit('judge', judge);
+  });
   socket.on('winner', function(winner){
     let room = winner.room
     socket.join(room);
