@@ -57,6 +57,11 @@ io.on('connection', function(socket){
     socket.join(room);
     io.in(room).emit('join game', user);
   });
+  socket.on('existing players', function(players){
+    let room = players.room
+    socket.join(room);
+    io.in(room).emit('existing players', players);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
