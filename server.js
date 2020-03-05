@@ -55,7 +55,8 @@ io.on('connection', function(socket){
   socket.on('join game', function(user){
     let room = user.room
     socket.join(room);
-    io.in(room).emit('join game', user);
+    // io.in(room).emit('join game', user);
+    io.broadcast.to(room).emit('join game', user);
   });
   socket.on('existing players', function(players){
     let room = players.room
