@@ -31,6 +31,22 @@ exports.Green = (req, res, next) => {
         }})
       }
 
+      exports.Black = (req, res, next) => {
+        instance.connect((err, client) => {
+          if (err) {res.send(err)} else {
+          const collection = client.db("project-database").collection("cah-black")
+          collection.find().toArray().then(r => res.send(r))
+        }})
+      }
+
+      exports.White = (req, res, next) => {
+        instance.connect((err, client) => {
+          if (err) {res.send(err)} else {
+          const collection = client.db("project-database").collection("cah-white")
+          collection.find().toArray().then(r => res.send(r))
+        }})
+      }
+
       exports.Creategame = (req, res, next) => {
         instance.connect((err, client) => {
           if (err) {res.send(err)} else {
