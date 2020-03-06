@@ -26,10 +26,10 @@ app.use(bodyParser.json())
 app.use(cors());
 
 var pusher = new Pusher({
-  appId: '953987',
-  key: '462207fd95a0750caf6c',
-  secret: '92abccd7d06d8ced65ac',
-  cluster: 'us3',
+  appId: process.env.APPID,
+  key: process.env.KEY,
+  secret: process.env.SECRET,
+  cluster: process.env.CLUSTER,
   encrypted: true
 });
 
