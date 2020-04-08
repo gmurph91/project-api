@@ -6,6 +6,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var moviesRouter = require('./routes/movies');
+var listRouter = require('./routes/lists');
 const Pusher = require('pusher');
 var blogRouter = require('./routes/blog');
 var codeRouter = require('./routes/codenames')
@@ -94,6 +95,7 @@ app.use('/movies', moviesRouter);
 app.use('/blog', blogRouter);
 app.use('/codenames', codeRouter);
 app.use('/apples', appleRouter);
+app.use('/lists', listRouter);
 
 app.post('/message', (req, res) => {
   const payload = req.body;
